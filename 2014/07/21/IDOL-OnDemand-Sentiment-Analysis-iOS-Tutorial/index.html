@@ -4,21 +4,39 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
-  <title>Tag: iOS | Mobile App Dev</title>
+  <title>IDOL OnDemand Sentiment Analysis iOS Tutorial | Mobile App Dev</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
     <meta name="author" content="Jinyu Li">
   
   
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mobile App Dev">
-<meta property="og:url" content="http://disorderdev.github.io/tags/iOS/">
+    <meta name="description" content="Introduction
+This project is written in Objective-C, to show how to use IDOL OnDemand API.
+we’ll use a series of IDOL OnDemand API to analyze tweets, here is the workflow:
+
+first we’ll pull tweets fro">
+  
+  <meta name="description" content="Introduction
+This project is written in Objective-C, to show how to use IDOL OnDemand API.
+we’ll use a series of IDOL OnDemand API to analyze tweets, here is the workflow:
+
+first we’ll pull tweets fro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDOL OnDemand Sentiment Analysis iOS Tutorial">
+<meta property="og:url" content="http://disorderdev.github.io/2014/07/21/IDOL-OnDemand-Sentiment-Analysis-iOS-Tutorial/">
 <meta property="og:site_name" content="Mobile App Dev">
-<meta property="og:description">
+<meta property="og:description" content="Introduction
+This project is written in Objective-C, to show how to use IDOL OnDemand API.
+we’ll use a series of IDOL OnDemand API to analyze tweets, here is the workflow:
+
+first we’ll pull tweets fro">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mobile App Dev">
-<meta name="twitter:description">
+<meta name="twitter:title" content="IDOL OnDemand Sentiment Analysis iOS Tutorial">
+<meta name="twitter:description" content="Introduction
+This project is written in Objective-C, to show how to use IDOL OnDemand API.
+we’ll use a series of IDOL OnDemand API to analyze tweets, here is the workflow:
+
+first we’ll pull tweets fro">
   
     <link rel="alternate" href="/atom.xml" title="Mobile App Dev" type="application/atom+xml">
   
@@ -52,15 +70,7 @@
   </nav>
   <div class="clearfix"></div>
 </header>
-    <div class="content">
-
-
-<h2 class="archives-title tag"><span>iOS</span></h2>
-
-
-
-  
-    <article class="post">
+    <div class="content"><article class="post">
   <header>
     
       <div class="icon"></div>
@@ -72,7 +82,7 @@
     
     
   
-    <h1 class="title"><a href="/2014/07/21/IDOL-OnDemand-Sentiment-Analysis-iOS-Tutorial/">IDOL OnDemand Sentiment Analysis iOS Tutorial</a></h1>
+    <h1 class="title">IDOL OnDemand Sentiment Analysis iOS Tutorial</h1>
   
 
   </header>
@@ -330,207 +340,22 @@ NSString * <span class="keyword">const</span> kIOSTRestServerAPIVersion = @<span
 
     
   </div>
-  <footer class="end-sep">
+  <footer>
     
       
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2014/07/06/IDOL-OnDemand-Tutorial-Part-1/">
-  <time datetime="2014-07-06T12:31:56.000Z">
-    Jul 6 2014
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2014/07/06/IDOL-OnDemand-Tutorial-Part-1/">IDOL OnDemand Tutorial Part 1</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <h2 id="Project_Structure">Project Structure</h2>
-<h3 id="Libraries_Used">Libraries Used</h3>
-<ul>
-<li><a href="http://www.teehanlax.com/blog/model-view-viewmodel-for-ios/" target="_blank" rel="external">MVVM</a>: this project follows MVVM pattern(not so strictly). and <a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a> is used to notify any change. I know it’s a little overkilled to use MVVM, but it’s still a good change to practice.</li>
-<li><a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="external">AFNetworking</a>: used to manage network operations.</li>
-<li><a href="https://github.com/nicklockwood/FXForms" target="_blank" rel="external">FXForms</a>: a good framework to handle form, used to collect parameters for each API.</li>
-</ul>
-<h3 id="Structure">Structure</h3>
-<p>For each API tutorial, there are mainly two View Controllers, one is to collect parameters using <strong>FXForms</strong> and send network request with <strong>AFNetworking</strong>, the other one is to show the result.</p>
-<p>With <strong>MVVM</strong> pattern, each <em>View Controller</em> will have one <strong>ViewModel</strong>, and each <strong>ViewModel</strong> has at least one <strong>Model</strong>, all classes in such set have the same prefix name, so it would be easy to find them, and read code.</p>
-<h2 id="API_Usage">API Usage</h2>
-<p>What’s <a href="https://www.idolondemand.com/" target="_blank" rel="external">IDOL OnDemand?</a></p>
-<blockquote>
-<p>IDOL OnDemand delivers a growing set of RESTful APIs to help developers build apps that tackle the explosive growth of unstructured data. We’re exposing the capabilities of HP IDOL (Intelligent Data Operating Layer), the world’s leading on-premise human information processing engine, to deliver a wide selection of web services, including sentiment analysis, face detection, entity extraction, text indexing, and more – for quick and lightweight integration into your apps.</p>
-</blockquote>
-<h3 id="Base">Base</h3>
-<p>To reuse code, I abstract some base classes which are in <em>base</em> folder. For example, <code>IOBaseHttpViewModel</code> uses parameters from <code>IOBaseForm</code> to generate a request, and then send out the request.</p>
-<figure class="highlight objective-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre><span class="variable">@weakify</span>(<span class="keyword">self</span>);
-[manager <span class="constant">POST</span><span class="symbol">:</span>[form syncAPI]
-   <span class="symbol">parameters:</span>params
-      <span class="symbol">success:</span>^(<span class="constant">AFHTTPRequestOperation</span> *operation, id responseObject) {
-          <span class="variable">@strongify</span>(<span class="keyword">self</span>);
-          [<span class="keyword">self</span>.networkSignal <span class="symbol">sendNext:</span>responseObject];
-      }
-      <span class="symbol">failure:</span>^(<span class="constant">AFHTTPRequestOperation</span> *operation, <span class="constant">NSError</span> *error) {
-          <span class="variable">@strongify</span>(<span class="keyword">self</span>);
-          <span class="constant">NSLog</span>(@<span class="string">"%@"</span>, error);
-          [<span class="keyword">self</span>.networkSignal <span class="symbol">sendError:</span>error];
-          <span class="keyword">self</span>.networkSignal = [<span class="constant">RACSubject</span> subject];
-          [<span class="keyword">self</span>.resubscripeNetworkSignal <span class="symbol">sendNext:</span><span class="keyword">nil</span>];
-      }];
-</pre></td></tr></table></figure>
-
-<h3 id="Async_VS-_Sync">Async VS. Sync</h3>
-<p>Each API can be run in async or sync mode. Sync API is sent by IOBaseHttpViewModel as mentioned above.<br>Async API is managed by IOAsyncRequestManager. For Async request, everything is run in background, no block on UI, and once the job is done, users will be notified.</p>
-<p>Send async job, and parse JobID</p>
-<figure class="highlight objective-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-</pre></td><td class="code"><pre>AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-[manager POST:[form asyncAPI]
-   parameters:[form httpParameters]
-      success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {
-          <span class="built_in">NSDictionary</span> *data = responseObject;
-          <span class="built_in">NSString</span> *jobId = data[@<span class="string">"jobID"</span>];
-          [<span class="keyword">self</span> addJob:jobId
-            identifier:form<span class="variable">.resultControllerIdentifier</span>
-          		  desc:form<span class="variable">.submmary</span>];
-      }
-      failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {
-          <span class="built_in">NSLog</span>(@<span class="string">"%@"</span>, error);
-          <span class="built_in">NSString</span> template = @<span class="string">"Failed to create job for %@, with error:\n%@"</span>;
-          <span class="built_in">NSString</span> *msg = [<span class="built_in">NSString</span> stringWithFormat:template,
-                                                     form<span class="variable">.submmary</span>,
-                                                     error<span class="variable">.localizedDescription</span>];
-          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@<span class="string">"Error"</span>
-                                                          message:msg
-                                                         delegate:<span class="literal">nil</span>
-                                                cancelButtonTitle:@<span class="string">"OK"</span>
-                                                otherButtonTitles:<span class="literal">nil</span>];
-          [alert show];
-      }];
-</pre></td></tr></table></figure>
-
-<p>Query async job result</p>
-<figure class="highlight objective-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre>AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-<span class="built_in">NSDictionary</span> *params = @{@<span class="string">"apikey"</span> : kIOAPIKey};
-
-[manager GET:[<span class="built_in">NSString</span> stringWithFormat:@<span class="string">"https://api.idolondemand.com/1/job/result/%@"</span>,
-                                        job<span class="variable">.jobId</span>]
-  parameters:params
-     success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {
-         [<span class="keyword">self</span> processJob:job result:responseObject];
-     }
-     failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {
-         [<span class="keyword">self</span> processJob:job error:error<span class="variable">.localizedDescription</span>];
-     }];
-</pre></td></tr></table></figure>
-
-<h3 id="Find_Similar"><a href="https://www.idolondemand.com/developer/apis/findsimilar#overview" target="_blank" rel="external">Find Similar</a></h3>
-<blockquote>
-<p>Finds documents that are conceptually similar to your text or a document.</p>
-</blockquote>
-<p>First, this API supports several input sources: <em>text</em>, <em>reference</em>, <em>file</em>, <em>index_reference</em>, <em>url</em>, in this demo app, only <em>text</em> is supported.</p>
-<p>Second, except input sources, this API also supports some parameters to modify the query result, such as <em>sort</em>, <em>minScore</em>, .etc. in this demo app, only <em>max result</em>, <em>indexes</em>, and <em>sort</em> are supported.</p>
-<p>In this demo app, <code>IOFindSimilarForm</code> is used collect API parameters, and <code>IOFindSimiliarViewController</code> is used to show the form.<br>Once the result is back, <code>IOFindSimilarResultViewModel</code> is used to parse json data, and show it in <code>IOFindSimilarResultViewController</code></p>
-<h3 id="OCR_Document"><a href="https://www.idolondemand.com/developer/apis/ocrdocument#overview" target="_blank" rel="external">OCR Document</a></h3>
-<blockquote>
-<p>Extracts text from an image.</p>
-</blockquote>
-<p>First, this API supports several input sources: <em>file</em>, <em>reference</em>, <em>url</em>, in this demo app, only <em>url</em> is supported.</p>
-<p>Second, this API also supports a parameter to modify the query result, named <em>mode</em></p>
-<p>In this demo app, <code>IOOCRDocumentForm</code> is used collect API parameters, and <code>IOOCRDocumentViewController</code> is used to show the form.<br>Once the result is back, <code>IOOCRDocumentResultViewModel</code> is used to parse json data, and show it in <code>IOOCRDocumentResultViewController</code></p>
-<h3 id="Sentiment_Analysis"><a href="https://www.idolondemand.com/developer/apis/analyzesentiment#overview" target="_blank" rel="external">Sentiment Analysis</a></h3>
-<blockquote>
-<p>Analyzes text for positive or negative sentiment.</p>
-</blockquote>
-<p>First, this API supports several input sources: <em>text</em>, <em>file</em>, <em>reference</em>, <em>url</em>, in this demo app, only <em>url</em> and <em>text</em> are supported.</p>
-<p>Second, this API also supports a parameters to modify the query result, named <em>language</em>.</p>
-<p>In this demo app, <code>IOSentimentAnalysisForm</code> is used collect API parameters, and <code>IOSentimentAnalysisViewController</code> is used to show the form.<br>Once the result is back, <code>IOSentimentAnalysisResultViewModel</code> is used to parse json data, and show it in <code>IOSentimentAnalysisResultViewController</code></p>
-<p>Actually, there are two places to run this API, one is from <strong>API List</strong>, another one is from the result of <strong>Find Similar</strong>, each item of <strong>Find Similar</strong> result is clickable, after it’s clicked, a web view will be shown to load the resource online. just at the top right corner, there is a button called <strong>Sentiment Analysis</strong>.</p>
-<h2 id="Improvements">Improvements</h2>
-<ul>
-<li>Support more parameters and input sources for each API.</li>
-</ul>
-
-    
+  <div class="categories">
+    <a class="categories-link" href="/categories/iOS/">iOS</a>
   </div>
-  <footer class="end-sep">
-    
+
       
-      
+  <div class="tags">
+    <a class="tags-link" href="/tags/IDOL-OnDemand/">IDOL OnDemand</a>, <a class="tags-link" href="/tags/iOS/">iOS</a>
+  </div>
+
     
     <div class="clearfix"></div>
   </footer>
 </article>
-
-
-  
-
-  <nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
 
 </div>
   </div>
